@@ -15,6 +15,12 @@
       <button @click="submitContact">Submit</button>
 
     </form>
+    <br>
+    <form v-on:submit.prevent>
+      <input type="email" v-model="email"/>
+      <input type="hiden" v-model="password"/>
+      <button @click="login">Login</button>
+    </form>
   </div>
 </template>
 
@@ -29,7 +35,9 @@ export default {
         first_name: '',
         last_name: '',
         email: ''
-      }
+      },
+      email: '',
+      password: ''
     }
   },
 
@@ -48,6 +56,12 @@ export default {
     },
     deleteContact(id) {
       contact.delete(id).then(()=> this.contacts = this.contacts.filter(c => c.id !== id))
+    },
+
+    login() {
+      contact.login({email: this.email, password: this.password}).then(r => {
+        console.log('Login success', r)
+      })
     }
   }
 }

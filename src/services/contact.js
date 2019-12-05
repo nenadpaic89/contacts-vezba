@@ -19,6 +19,10 @@ class Contact {
   delete(id) {
     return axios.delete(`http://localhost:8000/api/contacts/${id}`)
   }
+
+  login(credentials) {
+    return axios.post('http://localhost:8000/api/login', credentials)
+  }
 }
 
 export const contact = new Contact()
